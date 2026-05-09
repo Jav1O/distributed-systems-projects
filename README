@@ -1,0 +1,60 @@
+Compilacion
+===========
+
+Compilar todos los ejecutables C:
+
+    make
+
+Limpiar ejecutables:
+
+    make clean
+
+Ejecucion
+=========
+
+1. Servicio web de normalizacion, en cada maquina donde se ejecute un cliente:
+
+    python3 web_service.py -p 8080
+
+   Si se usa otro puerto, configurar el cliente con:
+
+    export WEB_SERVICE_URL=http://127.0.0.1:PUERTO/normalize
+
+2. Servicio RPC de log:
+
+    ./log_rpc_server
+
+3. Servidor de mensajeria:
+
+    export LOG_RPC_IP=127.0.0.1
+    ./server -p 8888
+
+   Si no se define LOG_RPC_IP, la mensajeria funciona igualmente, pero no se registran
+   operaciones por RPC.
+
+4. Clientes:
+
+    python3 client.py -s 127.0.0.1 -p 8888
+
+Comandos soportados
+===================
+
+    REGISTER <userName>
+    UNREGISTER <userName>
+    CONNECT <userName>
+    DISCONNECT <userName>
+    USERS
+    SEND <userName> <message>
+    SENDATTACH <userName> <message> <fileName>
+    GETFILE <userName> <fileName> <localFileName>
+    QUIT
+
+Notas de protocolo
+==================
+
+- Los mensajes de texto se normalizan mediante el servicio web antes de enviarse.
+- USERS devuelve entradas con formato: usuario :: IP :: puerto.
+- GETFILE se realiza directamente entre clientes usando sockets; el servidor de
+  mensajeria no transfiere el contenido del fichero.
+- SENDATTACH envia el nombre del fichero por el servidor. El contenido se obtiene
+  despues con GETFILE.
