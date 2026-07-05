@@ -2,7 +2,7 @@
 
 Academic distributed systems project developed in C as part of the Distributed Systems course at Universidad Carlos III de Madrid.
 
-This repository contains the progressive implementation of a distributed tuple-based key-value service. The project is organized across different branches, each one representing a different stage of the system and communication mechanism.
+This repository contains the progressive implementation of a distributed tuple-based key-value service. The project is organized across different branches, each one representing a different stage of the system and a different communication mechanism.
 
 The goal of the project is to understand how distributed services are designed, implemented, tested and evolved using different inter-process and network communication techniques.
 
@@ -17,11 +17,13 @@ Each tuple follows this structure:
 - `value2[]`
 - `value3`
 
-The client uses a public API, while the communication with the server is handled internally through proxies and different communication protocols depending on the branch.
+The client interacts with the system through a public API, while the communication with the server is handled internally through proxies and different communication protocols depending on the branch.
 
 ## Branches
 
-### POSIX Message Queues
+This repository is organized by branches. Each branch represents a different implementation stage of the same distributed service.
+
+### `main` – POSIX Message Queues
 
 Implementation of the client-server architecture using POSIX message queues.
 
@@ -34,39 +36,55 @@ Main concepts:
 - Server-side tuple storage
 - Error handling and validation
 
-### TCP Sockets
+### `ejercicio-2` – Intermediate Implementation Stage
+
+Intermediate stage of the distributed service implementation.
+
+Main concepts:
+
+- Evolution of the client-server design
+- Improved communication structure
+- API validation
+- Error handling
+- Testing and debugging of distributed operations
+
+### `ejercicio-3` – TCP Sockets
 
 Implementation of the same distributed service using TCP sockets.
 
 Main concepts:
 
 - TCP client-server communication
-- Custom binary protocol
+- Custom communication protocol
 - Network byte order
+- Server IP and port configuration
 - Persistent server process
-- Environment variables for server IP and port
 - Error handling when the server is unavailable
 
-### RPC
+### `practica-final` – RPC / Final Version
 
-Implementation of the distributed service using Remote Procedure Calls.
+Final implementation of the distributed service, integrating the main concepts developed throughout the project and introducing Remote Procedure Calls.
 
 Main concepts:
 
+- Complete distributed key-value tuple service
 - RPC-based communication
-- Remote service definition
-- Client stubs and server procedures
-- Serialization of requests and responses
-- Transparent remote procedure execution
+- Client-server architecture
+- Remote service procedures
+- Data serialization
+- Server-side validation
+- Automated testing
+- Robust error management
 
 ## Main Features
 
-- Tuple creation and modification
+- Tuple creation
+- Tuple modification
 - Tuple retrieval
 - Tuple deletion
 - Existence checking
 - Service reset
-- Client-side API
+- Client-side public API
 - Server-side validation
 - Automated testing scripts
 - Progressive implementation using different distributed communication mechanisms
@@ -83,7 +101,7 @@ Main concepts:
 
 ## Repository Structure
 
-The repository is organized by branches, where each branch contains a different implementation stage of the project.
+The repository structure may vary depending on the selected branch, since each branch contains a different stage of the project.
 
 Typical files include:
 
@@ -95,6 +113,27 @@ Typical files include:
 - `run_tests.sh`: automated testing script.
 - `PLAN_PRUEBAS.md`: testing plan and validation cases.
 
-## What I Learned
+## How to Explore the Project
 
-This project helped me understand how distributed systems evolve from local APIs to real client-server architectures. I worked with different communication mechanisms such as POSIX message queues, TCP sockets and RPC, while improving my knowledge of protocol design, error handling, concurrency, testing, and low-level programming in C.
+To review the different implementations, switch between branches:
+
+```bash
+git checkout main
+git checkout ejercicio-2
+git checkout ejercicio-3
+git checkout practica-final
+```
+
+Each branch contains a different version of the distributed service and shows the progression from basic inter-process communication to more advanced distributed communication mechanisms.
+
+What I Learned
+
+This project helped me understand how distributed systems evolve from a local API to real client-server architectures.
+
+I worked with different communication mechanisms such as POSIX message queues, TCP sockets and RPC, while improving my knowledge of protocol design, error handling, concurrency, automated testing, Linux development and low-level programming in C.
+
+Academic Context
+
+This project was developed as part of the Distributed Systems course at Universidad Carlos III de Madrid.
+
+The main objective was to implement and progressively improve a distributed service while applying theoretical and practical concepts related to communication, synchronization, client-server architectures and distributed programming.
